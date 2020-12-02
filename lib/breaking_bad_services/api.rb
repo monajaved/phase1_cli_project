@@ -12,12 +12,19 @@ class Api
         response = RestClient.get(base_url + '/characters') 
         data = JSON.parse(response.body)
 
-        data.each_with_index do |character_data, index|
+        data.each do |character|
             
-            binding.pry
+            Character.new(character["name"], character["birthday"], character["occupation"], character["status"])
+            
         end
     end
 
-    
+    # def self.load_quotes
+    #     response_quotes = RestClient.get(base_url + '/quotes')
+    #     data_quotes = JSON.parse(response_quotes.body)
+    #     data_quotes.each do |quotes|
+    #         Quotes.new
+    #     end
+    # end
 
 end
