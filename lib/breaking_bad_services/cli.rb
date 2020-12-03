@@ -1,25 +1,13 @@
 class Cli
 
     def start
-        puts "" 
-        puts "-------------------------------------"
-        puts "Welcome to the world of Breaking Bad."
-        puts "-------------------------------------"
-        puts ""
-        puts "Loading..."
-        puts ""
+        puts "\n\n-------------------------------------\n\nWelcome to the world of Breaking Bad.\n\n-------------------------------------\n\nLoading...\n\n"
         Api.load_data
         main_menu_options
     end
 
     def main_menu_options
-        puts ""
-        puts "Type '1' to get information about the characters."
-        puts ""
-        puts "Type '2' to get famous Breaking Bad quotes."
-        puts ""
-        puts "Type 'exit' to exit the program."
-        puts ""
+        puts "\nType '1' to get information about the characters\n\nType '2' to get famous Breaking Bad quotes.\n\nType 'exit' to exit the program."
         main_menu
     end
 
@@ -28,10 +16,11 @@ class Cli
         if input == "1"
             list_characters
             sub_menu
+        elsif input == "2"
+            list_quotes
+            sub_menu_quotes
         elsif input == "exit"
-            puts ""
-            puts "Exiting Breaking Bad"
-            puts ""
+            puts "\nExiting Breaking Bad\n\n"
         else
             invalid_choice
             main_menu_options
@@ -45,11 +34,7 @@ class Cli
     end
 
     def sub_menu
-        puts ""
-        puts "Select the number next to the character you wish to know more about."
-        puts ""
-        puts "Or type 'exit' to exit the program"
-        puts ""
+        puts "\nSelect the number next to the character you wish to know more about.\n\nOr type 'exit' to exit the program."
         character_details_menu
     end
 
@@ -57,14 +42,12 @@ class Cli
         input = get_input
 
         if input.to_i.between?(1, Character.all.length)
-        index = input.to_i - 1
-        character = Character.all[index]
-        print_character_details(character) 
-        select_or_exit
+            index = input.to_i - 1
+            character = Character.all[index]
+            print_character_details(character) 
+            select_or_exit
         elsif input == "exit"
-            puts ""
-            puts "Exiting Breaking Bad"
-            puts ""
+            puts "\n\nExiting Breaking Bad\n\n"
             exit
         else
             invalid_choice
@@ -78,29 +61,23 @@ class Cli
         puts "Character Birthday: #{character.birthday}"
         puts "Character Occupation: #{character.occupation}"
         puts "Character Status: #{character.status}"
+        puts "Character Portrayed by: #{character.portrayed}"
+        puts "Character Category: #{character.category}"
+        # puts "Character Appearance in Better Call Saul: #{character.better_call_sall_appearance}"
         puts "-------------------------------------------------"
     end
 
     def select_or_exit
-        puts "Would you like to continue or go back to the main menu?"
-        puts ""
-        puts "'1' for main menu"
-        puts ""
-        puts "'2' to continue"
-        puts ""
-        puts "'exit' to exit program"
-        puts ""
+        puts "\n\nWould you like to continue or go back to the main menu?\n\n'1' for main menu\n\n'2' to continue\n\n'exit' to exit program."
         input = get_input
 
         if input == '1' 
             main_menu_options
-        elsif input == "2"
+        elsif input == '2'
             list_characters
             character_details_menu
         elsif input == 'exit'
-            puts ""
-            puts "Goodbye!"
-            puts ""
+            puts "\nS'all good, man.\n\n"
             exit
         else
             invalid_choice
@@ -108,17 +85,79 @@ class Cli
         end
     end
 
+    def list_quotes
+        Quotes.all.each.with_index(1) do |quote, index|
+            puts "#{index}: #{quote.author}"
+        end
+    end
 
+    def sub_menu_quotes
+        puts "\n\nSelect the character whose quote you want to see.\n\nOr type 'exit' to exit the program.\n"
+        quotes_detail_menu
+    end
+
+    def quotes_detail_menu
+        input = get_input
+        if input.to_i.between?(1, Quotes.all.length)
+            index = input.to_i - 1
+            quotes = Quotes.all[index]
+            print_quotes_details(quotes)
+            select_or_exit_quotes
+        elsif input == "exit"
+            puts "\nS'all good, man.\n\n"
+            exit
+        else
+            invalid_choice
+            quotes_detail_menu
+        end
+    end
+
+    def print_quotes_details(quotes)
+        puts "\n\n-------------------------------------------------\nAuthor: #{quotes.author}\n\nQuote: #{quotes.quote}\n-------------------------------------------------\n\n"
+    end
+
+    def select_or_exit_quotes
+        puts "\nWould you like to continue or go back to the main menu?\n\n'1' for main menu\n\n'2' to continue\n\n'exit' to exit program."
+        input = get_input
+
+        if input == '1' 
+            main_menu_options
+        elsif input == '2'
+            list_quotes
+            quotes_detail_menu
+        elsif input == 'exit'
+            puts "\nS'all good, man.\n\n"
+            exit
+        else
+            invalid_choice
+            select_or_exit_quotes
+        end
+    end
+
+    # def select_or_exit
+    #     puts "\n\nWould you like to continue or go back to the main menu?\n\n'1' for main menu\n\n'2' to continue\n\n'exit' to exit program"
+    #     input = get_input
+
+    #     if input == '1' 
+    #         main_menu_options
+    #     elsif input == "2"
+    #         list_characters
+    #         character_details_menu
+    #     elsif input == 'exit'
+    #         puts "\nS'all good, man.\n\n"
+    #         exit
+    #     else
+    #         invalid_choice
+    #         select_or_exit
+    #     end
+    # end
 
     def invalid_choice
-        puts ""
-        puts "Invalid input. Please try again."
-        puts ""
+        puts "\nInvalid input. Please try again.\n\n"
     end
 
     def get_input
-        puts ""
-        print "Enter choice: "
+        print "\nEnter choice: "
         gets.chomp
     end
 end
