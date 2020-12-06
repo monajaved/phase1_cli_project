@@ -1,7 +1,7 @@
 class Cli
 
     def start
-        puts "\n\n-------------------------------------\n\nWelcome to the world of Breaking Bad.\n\n-------------------------------------\n\nLoading...\n\n"
+        puts "\n\n-------------------------------------\n\nWelcome to Breaking Bad API\n\n-------------------------------------\n\nLoading...\n\n"
         Api.load_data
         main_menu_options
     end
@@ -133,25 +133,7 @@ class Cli
             select_or_exit_quotes
         end
     end
-
-    # def select_or_exit
-    #     puts "\n\nWould you like to continue or go back to the main menu?\n\n'1' for main menu\n\n'2' to continue\n\n'exit' to exit program"
-    #     input = get_input
-
-    #     if input == '1' 
-    #         main_menu_options
-    #     elsif input == "2"
-    #         list_characters
-    #         character_details_menu
-    #     elsif input == 'exit'
-    #         puts "\nS'all good, man.\n\n"
-    #         exit
-    #     else
-    #         invalid_choice
-    #         select_or_exit
-    #     end
-    # end
-
+ 
     def invalid_choice
         puts "\nInvalid input. Please try again.\n\n"
     end

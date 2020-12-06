@@ -6,5 +6,7 @@ Things to do :
 -rename classes                           (x)
 -add quotes.rb                            (x)
 -backspace problem while taking input
--attributes in character class
--invalid choice in quotes
+-attributes in character class            (x)
+-invalid choice in quotes                 (x)
+-work on Readme, and video and blog 
+(blog must be technical in nature)
