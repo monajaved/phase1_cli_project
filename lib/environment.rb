@@ -1,5 +1,3 @@
-# require_relative "./"
-
 require 'pry'
 require 'bundler'
 require 'json'
